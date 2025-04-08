@@ -21,7 +21,9 @@ export const Login = () => {
     event.preventDefault();
     setLoading(true);
     setError("");
-
+	const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
     const formData = new FormData(event.target);
     const data = {
       email: formData.get("email"),
@@ -29,8 +31,8 @@ export const Login = () => {
     };
     try {
       // Login request
-      const response = await axios.post("http://localhost:8080/api/admin/login", data);
-      console.log("ISlogged in or noy: ", Cookies.get("curr_adminEmail"));
+      const response = await axios.post(`http://${host}:8080/api/admin/login`, data);
+      console.log("ISlogged in or not: ", Cookies.get("curr_adminEmail"));
 
       if (response.data.role === "admin" && response.status === 200) {
         const { token, message, ...rest } = response.data;
@@ -40,11 +42,15 @@ export const Login = () => {
         document.cookie = `Role=${response.data.role}; path=/;`;
         document.cookie = `token=${response.data.token}; path=/;`;
 
-        document.cookie = `user=${(rest)}; path=/;`;
+        // document.cookie = `name=${(response.data.name)}; path=/;`;
     
         login(rest); // Assuming this updates state
-    
-        toast.success("Login Successful", {
+		const { name, email } = response.data;
+
+		const user = { name, email };
+		localStorage.setItem("user", JSON.stringify(user));
+		
+		toast.success("Login Successful", {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,

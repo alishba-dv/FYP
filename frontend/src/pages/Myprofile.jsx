@@ -11,7 +11,9 @@ export const Myprofile = () => {
   const userName = Cookies.get("curr_Name");
   const userEmail = Cookies.get("curr_userEmail");
   console.log("USername and emmail : ",userName,userEmail)
-
+  const host = window.location.hostname === 'localhost'
+  ? 'localhost'
+  : '0.0.0.0'; 
   const [userData, setData] = useState({
     name: userName,
     email: userEmail,
@@ -50,7 +52,7 @@ export const Myprofile = () => {
     };
 
     try {
-      const response = await axios.put("http://localhost:8080/api/auth/editProfile", newData, {
+      const response = await axios.put(`http://${host}:8080/api/auth/editProfile`, newData, {
         withCredentials: true,
       });
 

@@ -11,12 +11,17 @@ const AccessProducts = () => {
 	const [productData, setProductData] = useState(null);
 	const [isOutOfStock, setIsOutOfStock] = useState(false); // State to track out-of-stock status
 	const [currentIndex, setCurrentIndex] = useState(0);
-
+	const host = window.location.hostname === 'localhost'
+	? 'localhost'
+	: '0.0.0.0';
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
+				const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
 				const response = await axios.post(
-					'http://localhost:8080/api/Accessories'
+					`http://${host}:8080/api/Accessories`
 				);
 				console.log('Response: ', response);
 
@@ -80,7 +85,7 @@ const AccessProducts = () => {
 						productData.image.length > 0 ? (
 							<>
 								<img
-									src={`http://localhost:8080/uploads/${productData.image[currentIndex]}`}
+									src={`http://${host}:8080/uploads/${productData.image[currentIndex]}`}
 									className='hover:scale-110 transition ease-in-out w-full object-contain max-h-[500px]'
 									alt={productData.name || 'Product Image'}
 								/>
@@ -105,7 +110,7 @@ const AccessProducts = () => {
 					</div>
 
 					{/* Product Details */}
-					<div className='flex-1 sm:mt-20 mt-2 max-w-[500px]'>
+					<div className='flex-1 sm:mt-20 sm:mx-0 mx-5 mt-2 max-w-[500px]'>
 						<h1 className='font-medium text-2xl'>{productData.name}</h1>
 						<p className='mt-5 text-3xl font-medium'>
 							RS.

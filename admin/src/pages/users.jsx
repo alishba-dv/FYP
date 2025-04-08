@@ -4,6 +4,10 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const User = () => {
+
+	const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
 	const [users, setUsers] = useState([]);
 	useEffect(() => {
 		toast.dismiss(); // Clear all previous toasts
@@ -12,7 +16,7 @@ export const User = () => {
 		const fetchUsers = async () => {
 			try {
 				// const token = localStorage.getItem('token');
-				const response = await axios.get('http://localhost:8080/api/admin/auth/users', {
+				const response = await axios.get(`http://${host}:8080/api/admin/auth/users`, {
 				withCredentials:true,	
 				});
 				console.log('Users: ', response.data.users);

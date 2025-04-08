@@ -11,9 +11,12 @@ const ManageSubscription = () => {
   const [loading, loadingSet] = useState(true);
   const [cancelOpen, cancelOpenSet] = useState(false);
   const toggleCancelModal = id => cancelOpenSet(pre => (pre ? false : id));
+  const host = window.location.hostname === 'localhost'
+  ? 'localhost'
+  : '0.0.0.0'; 
   async function getPlans() {
     try {
-      const response = await axios.get(`http://localhost:8080/api/auth/subscription/getByUserId`, {
+      const response = await axios.get(`http://${host}:8080/api/auth/subscription/getByUserId`, {
       withCredentials:true, 
       });
       if (response?.data) {
@@ -117,7 +120,7 @@ export function CancelModal({ id, toggleCancelModal, token }) {
   async function cancel() {
     loadingSet(true);
     try {
-      const response = await axios.delete(`http://localhost:8080/api/auth/subscription/cancel/${id}`, {
+      const response = await axios.delete(`http://${host}:8080/api/auth/subscription/cancel/${id}`, {
        withCredentials:true,
       });
       if (response?.data) {

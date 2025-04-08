@@ -43,9 +43,9 @@ function App() {
 
   return (
     <div >
-      <SalePoster  />
 
-      <Navbar />
+      <Navbar />      <SalePoster  />
+
       <Search></Search>
       <ToastContainer />
       <Routes>

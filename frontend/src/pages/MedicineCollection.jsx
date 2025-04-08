@@ -7,7 +7,9 @@ import axios from 'axios';
 export default function MedicineCollection() {
 	const { search, showSearch } = useContext(ShopContext);
 	const [value, setValue] = useState(false);
-
+	const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
 	// Store API data
 	const [medicineProducts, setMedicineProducts] = useState([]);
 	const [filterProducts, setFilterProducts] = useState([]);
@@ -19,7 +21,7 @@ export default function MedicineCollection() {
 		const fetchMedicines = async () => {
 			try {
 				const response = await axios.post(
-					'http://localhost:8080/api/Medicines'
+					`http://${host}:8080/api/Medicines`
 				);
 				setMedicineProducts(response.data.data);
 			} catch (error) {
@@ -65,7 +67,7 @@ export default function MedicineCollection() {
 
 	return (
 		<div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
-			<div className='min-w-[200px] mt-0 sm:mt-16 sm:min-w-[250px]'>
+			<div className='min-w-[200px] ml-4 mt-0 sm:mt-16 sm:min-w-[250px]'>
 				<p
 					onClick={() => setValue(!value)}
 					className='my-4 text-2xl font-semibold flex items-center cursor-pointer gap-2 hover:text-[#F24C4C] transition duration-300 ease-in-out sm:hidden'>
@@ -133,7 +135,7 @@ export default function MedicineCollection() {
 				<div className='mb-10'>
 					<h1
 						data-aos='fade-down'
-						className='text-[#F24C4C] text-5xl font-semibold sm:text-left'>
+						className='text-[#F24C4C] text-5xl sm:ml-0 ml-4 font-semibold sm:text-left'>
 						MEDICINES <span className='text-black'>COLLECTION</span>
 					</h1>
 				</div>

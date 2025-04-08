@@ -6,7 +6,9 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa6"; // Import the icons
 export const AccessProductItem = ({ id, image, name, price, noPrice = false, noLink = false }) => {
   const { currency } = useContext(ShopContext);
   const [currentIndex, setCurrentIndex] = useState(0);
-
+	const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
   const handleNext = e => {
     e.preventDefault();
     setCurrentIndex(prevIndex => (prevIndex + 1) % image.length);
@@ -23,7 +25,7 @@ export const AccessProductItem = ({ id, image, name, price, noPrice = false, noL
         {Array.isArray(image) && image.length > 0 ? (
           <>
             <img
-              src={`http://localhost:8080/uploads/${image[currentIndex]}`}
+              src={`http://${host}:8080/uploads/${image[currentIndex]}`}
               className="hover:scale-110 transition ease-in-out w-full"
               alt={name || "Product Image"}
             />

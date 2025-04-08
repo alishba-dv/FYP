@@ -20,7 +20,7 @@ export const MedSubProduct = ({ category, subcategory }) => {
 			<div>
 				<h1
 					data-aos='fade-right'
-					className='text-[#F24C4C] text-3xl font-semibold sm:text-left'>
+					className='text-[#F24C4C] text-3xl  font-semibold ml-5'>
 					RELATED <span className='text-black'>PRODUCTS</span>
 				</h1>
 			</div>

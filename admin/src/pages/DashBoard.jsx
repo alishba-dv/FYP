@@ -15,7 +15,9 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend,
 export const DashBoard = () => {
   const [timeframe, setTimeframe] = useState('monthly');
   const chartRef = useRef(null);
-
+  const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
 const [cardsData, setCardsData] = useState({
     totalOrders: 0,
     registeredUsers: 0,
@@ -36,7 +38,7 @@ const [cardsData, setCardsData] = useState({
         // Fetch orders
 
         const response = await axios.post(
-            'http://localhost:8080/api/admin/auth/Orders',
+            `http://${host}:8080/api/admin/auth/Orders`,
             {},
             {
                withCredentials:true, 
@@ -53,7 +55,7 @@ const [cardsData, setCardsData] = useState({
         const registeredUsers = new Set(data.map(order => order.email)).size; // Unique users by email
 
          const productsResponse =await axios.post(
-					'http://localhost:8080/api/admin/auth/List',
+					`http://${host}:8080/api/admin/auth/List`,
 					{},
 					{
 						withCredentials:true, 

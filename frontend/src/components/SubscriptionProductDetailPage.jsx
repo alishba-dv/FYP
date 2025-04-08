@@ -11,10 +11,12 @@ const SubscriptionProductDetailPage = () => {
 
   const [plan, planSet] = useState(null);
   const [loading, loadingSet] = useState(true);
-
+	const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
   async function getPlan() {
     try {
-      const response = await axios.get(`http://localhost:8080/api/auth/subscription/getById/${id}`, {
+      const response = await axios.get(`http://${host}:8080/api/auth/subscription/getById/${id}`, {
         withCredentials:true,
       });
       if (response?.data) {

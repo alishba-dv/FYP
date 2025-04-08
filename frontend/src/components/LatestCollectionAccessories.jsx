@@ -7,11 +7,13 @@ import axios from 'axios';
 export const LatestCollectionAccessories = () => {
 	// const { accessoriesProduct } = useContext(ShopContext);
 	const [premimumProducts, setPremimumProducts] = useState([]);
-
+	const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await axios.post(
-				'http://localhost:8080/api/Accessories'
+				`http://${host}:8080/api/Accessories`
 			);
 			setPremimumProducts(response.data.data.slice(0, 4));
 			console.log('premium products :', response.data.data);
@@ -24,7 +26,7 @@ export const LatestCollectionAccessories = () => {
 			<div className='flex flex-col px-7 sm:flex-row sm:justify-between items-center sm:items-start'>
 				<h1
 					data-aos='fade-right'
-					className='text-[#F24C4C] sm:text-5xl text-3xl font-semibold  sm:text-left'
+					className='text-[#F24C4C] sm:text-5xl text-2xl font-semibold  sm:text-left'
 					style={{ fontFamily: 'Playfair Display, serif' }}>
 					Premium <span className='text-black'>PET ACCESSORIES</span>
 				</h1>

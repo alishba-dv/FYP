@@ -13,7 +13,9 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { login } = useContext(ShopContext);
-
+  const host = window.location.hostname === 'localhost'
+  ? 'localhost'
+  : '0.0.0.0'; 
   const submitHandler = async event => {
     event.preventDefault();
     setLoading(true);
@@ -31,7 +33,7 @@ const Login = () => {
       if (state === "Sign Up") {
         // Sign up request
         response = await axios.post(
-          "http://localhost:8080/api/signup",
+          `http://${host}:8080/api/signup`,
 
           data
         );
@@ -84,7 +86,7 @@ const Login = () => {
         }
       } else {
         // Login request
-        response = await axios.post("http://localhost:8080/api/login", data);
+        response = await axios.post(`http://${host}:8080/api/login`, data);
         // localStorage.setItem("curr_userEmail", response.data.email);
         // localStorage.setItem("curr_Name", response.data.name);
 

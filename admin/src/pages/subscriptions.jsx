@@ -10,7 +10,9 @@ export const Subscription = () => {
   const [loading, loadingSet] = useState(true);
   const navigate = useNavigate();
   const goToAddSubscriptionPage = () => navigate("/subscription/add");
-
+  const host = window.location.hostname === 'localhost'
+  ? 'localhost'
+  : '0.0.0.0'; 
   const { pathname } = useLocation();
   const isAddSubscriptionPage = useMemo(() => pathname === "/subscription/add", [pathname]);
   // const token = localStorage.getItem("token");
@@ -26,8 +28,9 @@ export const Subscription = () => {
 		toast.dismiss(); // Clear all previous toasts
 	}, []);
   async function getSubscriptions() {
+    
     try {
-      const response = await axios.get("http://localhost:8080/api/auth/subscription", {
+      const response = await axios.get(`http://${host}:8080/api/auth/subscription`, {
        withCredentials:true,
       });
       if (response?.data) {
@@ -45,7 +48,7 @@ export const Subscription = () => {
 
   async function deleteSubscription(subId, index) {
     try {
-      const response = await axios.delete(`http://localhost:8080/api/auth/subscription/${subId}`, {
+      const response = await axios.delete(`http://${host}:8080/api/auth/subscription/${subId}`, {
         withCredentials:true,
       });
       if (response?.data) {

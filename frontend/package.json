@@ -16,6 +16,7 @@
     "axios": "^1.7.8",
     "dayjs": "^1.11.13",
     "express": "^4.21.1",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.479.0",
     "mongodb": "^6.11.0",
     "react": "^18.3.1",

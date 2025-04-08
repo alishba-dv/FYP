@@ -15,7 +15,9 @@ const SubscriptionPage4 = () => {
     "Peshawar", "Quetta", "Sialkot", "Gujranwala", "Hyderabad", "Sargodha",
     "Bahawalpur", "Sukkur", "Larkana"
   ];
-  
+  const host = window.location.hostname === 'localhost'
+  ? 'localhost'
+  : '0.0.0.0';  
   const statesOfPakistan = [
     "Punjab", "Sindh", "Khyber Pakhtunkhwa", "Balochistan", "Gilgit-Baltistan",
     "Azad Jammu & Kashmir", "Islamabad Capital Territory"
@@ -38,7 +40,7 @@ const SubscriptionPage4 = () => {
   
   async function getPlan() {
     try {
-      const response = await axios.get(`http://localhost:8080/api/auth/subscription/getById/${id}`, {
+      const response = await axios.get(`http://${host}:8080/api/auth/subscription/getById/${id}`, {
         withCredentials: true,
       });
 
@@ -125,7 +127,7 @@ const SubscriptionPage4 = () => {
     try {
       const stripe = await loadStripe("pk_test_51Qw1U8BCqcG9036LlgQ5ruG89O2Jx9CoiNVnfAaJwgULAxLTWaWvo1WU94flOX0Rk1BmmtzjGcZfCBsVS4ZInnk300gUQ4w3EJ");
 
-      const response = await axios.post("http://localhost:8080/api/auth/subscription/subscribe", body, {
+      const response = await axios.post(`http://${host}:8080/api/auth/subscription/subscribe`, body, {
         withCredentials: true,
       });
 

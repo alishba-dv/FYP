@@ -4,11 +4,13 @@ import axios from "axios";
 const SalePoster = () => {
   const [sale, setSale] = useState(null);
   const [timeLeft, setTimeLeft] = useState("");
-
+  const host = window.location.hostname === 'localhost'
+  ? 'localhost'
+  : '0.0.0.0'; 
   useEffect(() => {
     const fetchSale = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/getsale");
+        const response = await axios.get(`http://${host}:8080/api/getsale`);
         if (response.data && response.data.isActive) {
           setSale({
             percentage: response.data.discountPercentage,
@@ -55,10 +57,9 @@ const SalePoster = () => {
 
   return (
     <div className="w-full h-16 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white rounded shadow flex items-center justify-center text-base font-semibold glowing-banner">
-    🎉 Get <span className="mx-1 text-xl font-bold">{sale.percentage}%</span> OFF!
-    <span className="ml-4 text-lg font-semibold">⏳ Ends in: {timeLeft}</span>
-  </div>
-  
+      🎉 Get <span className="mx-1 text-xl font-bold">{sale.percentage}%</span> OFF!
+      <span className="ml-10 text-large">⏳ Ends in: {timeLeft}</span>
+    </div>
   );
 };
 

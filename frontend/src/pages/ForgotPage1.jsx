@@ -30,7 +30,10 @@ const ForgotPage1 = () => {
     console.log("Verifying email:", email);
     const token = localStorage.getItem("token");
     try {
-      const response = await axios.post("http://localhost:8080/api/forgot", { email });
+      const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
+      const response = await axios.post(`http://${host}:8080/api/forgot`, { email });
       console.log("Response:", response.data);
       // alert("Email verified For Password Recovery");
 

@@ -8,7 +8,9 @@ export const AdminSales = () => {
   const [editingSale, setEditingSale] = useState(null);
   const [editedSaleData, setEditedSaleData] = useState({});
   const [showEditModal, setShowEditModal] = useState(false);
-
+  const host = window.location.hostname === 'localhost'
+  ? 'localhost'
+  : '0.0.0.0'; 
   const [newSale, setNewSale] = useState({
     saleName: '',
     discountPercentage: 0,
@@ -20,7 +22,7 @@ export const AdminSales = () => {
   // Fetch sales
   const fetchSales = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/admin/sales/');
+      const response = await axios.get(`http://${host}:8080/api/admin/sales/`);
       setSales(response.data);
     } catch (error) {
       console.error('Error fetching sales:', error);
@@ -35,7 +37,7 @@ export const AdminSales = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/admin/sales/create', newSale);
+      const response = await axios.post(`http://${host}:8080/api/admin/sales/create`, newSale);
     //   setSales((prevSales) => [...prevSales, response.data.sale]);
       toast.success('Sale created successfully!');
     } catch (error) {
@@ -47,7 +49,7 @@ export const AdminSales = () => {
   // Update sale
   const handleUpdateSale = async (updatedSale) => {
     try {
-      await axios.put(`http://localhost:8080/api/admin/sales/update/${updatedSale._id}`, updatedSale);
+      await axios.put(`http://${host}:8080/api/admin/sales/update/${updatedSale._id}`, updatedSale);
       toast.success('Sale updated successfully!');
       setShowEditModal(false);
       fetchSales();
@@ -69,7 +71,7 @@ export const AdminSales = () => {
             <button
               onClick={async () => {
                 try {
-                  await axios.delete(`http://localhost:8080/api/admin/sales/delete/${saleId}`);
+                  await axios.delete(`http://${host}:8080/api/admin/sales/delete/${saleId}`);
                   setSales((prevSales) => prevSales.filter((sale) => sale._id !== saleId));
                   toast.success('Sale deleted successfully');
                   closeToast();

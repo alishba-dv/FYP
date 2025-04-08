@@ -10,16 +10,21 @@ export const Profile = () => {
 	}, []);
   const user = JSON.parse(localStorage.getItem("user"));
 
-  
+  console.log(user?.name);  // Safely access name
+  console.log(user?.email);
+   
   const [userData, setData] = useState({
-    name: user.name,
-    email: user.email,
+    name: user?.name,
+    email: user?.email,
   });
   const [isEdit, setEdit] = useState(false);
  
   const handleSave = async () => {
     const token = localStorage.getItem("token");
-
+    const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
+    
     let newName = user.name === userData.name ? null : userData.name;
     let newEmail = user.email === userData.email ? null : userData.email;
 
@@ -47,7 +52,7 @@ export const Profile = () => {
     };
 
     try {
-      const response = await axios.put("http://localhost:8080/api/auth/editProfile", newData, {
+      const response = await axios.put(`http://${host}:8080/api/auth/editProfile`, newData, {
       withCredentials:true, 
       });
 

@@ -15,14 +15,16 @@ export default function Subscribers() {
   useEffect(() => {
     toast.dismiss(); // Clear all previous toasts
   }, []);
-
+  const host = window.location.hostname === 'localhost'
+  ? 'localhost'
+  : '0.0.0.0'; 
   useEffect(() => {
     const fetchData = async () => {
       !loading && loadingSet(true);
       try {
         // const token = localStorage.getItem("token");
         // console.log("Token from order list admin: ", token);
-        const response = await axios.get(`http://localhost:8080/api/auth/subscription/getSubscribers/${option}`, {
+        const response = await axios.get(`http://${host}:8080/api/auth/subscription/getSubscribers/${option}`, {
           withCredentials:true, 
         });
         console.log("Plans ",response.data.plans);

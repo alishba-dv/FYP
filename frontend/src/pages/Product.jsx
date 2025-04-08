@@ -15,13 +15,15 @@ const Product = () => {
 	const [reviewMessage, setReviewMessage] = useState('');
 	const [isOutOfStock, setIsOutOfStock] = useState(false); // State to track out-of-stock status
 	const [currentIndex, setCurrentIndex] = useState(0);
-
+	const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
 				console.log('Product id: ', productId);
 				const response = await axios.post(
-					'http://localhost:8080/api/collection'
+					`http://${host}:8080/api/collection`
 				);
 				console.log('Response: ', response.data.data);
 
@@ -91,7 +93,7 @@ const Product = () => {
 						productData.image.length > 0 ? (
 							<>
 								<img
-									src={`http://localhost:8080/uploads/${productData.image[currentIndex]}`}
+									src={`http://${host}:8080/uploads/${productData.image[currentIndex]}`}
 									className='hover:scale-110 transition ease-in-out w-full object-contain max-h-[500px]'
 									alt={productData.name || 'Product Image'}
 								/>
@@ -115,7 +117,7 @@ const Product = () => {
 						)}
 					</div>
 
-					<div className='flex-1 mt-2 sm:mt-20 max-w-[500px] w-full'>
+					<div className='flex-1 mt-2 sm:mx-0 mx-5 sm:mt-20 max-w-[500px] w-full'>
 						<h1 className='font-medium text-2xl'>{productData.name}</h1>
 						<p className='mt-5 text-3xl font-medium'>
 							RS.

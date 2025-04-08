@@ -7,6 +7,10 @@ import { FaUpload } from 'react-icons/fa'; // Import the upload icon
 import Cookies from "js-cookie"; // Importing the js-cookie library
 
 export const Add = () => {
+
+	const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
 	const navigate = useNavigate();
 
 	const [images, setImages] = useState([]);
@@ -95,7 +99,7 @@ export const Add = () => {
 
 		try {
 			const response = await axios.post(
-				'http://localhost:8080/api/admin/auth/add',
+				`http://${host}:8080/api/admin/auth/add`,
 				formData,
 				{
 					withCredentials:true,

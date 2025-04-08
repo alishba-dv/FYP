@@ -11,7 +11,9 @@ const Orders = () => {
 	const [orders, setOrders] = useState([]);
 	const [loading, setLoading] = useState(true); // To show loading state
 	const [error, setError] = useState(null);
-
+	const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
 	useEffect(() => {
 		const fetchOrders = async () => {
 			try {
@@ -27,7 +29,7 @@ const Orders = () => {
 				console.log('Current user email at order fetch', email);
 
 				const response = await axios.post(
-					'http://localhost:8080/api/auth/orderFetch',token,
+					`http://${host}:8080/api/auth/orderFetch`,token,
 					
 					{
 					  withCredentials: true, // This allows credentials to be sent

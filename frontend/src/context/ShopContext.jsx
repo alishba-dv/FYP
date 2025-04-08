@@ -12,6 +12,7 @@ import Cookies from "js-cookie"; // Importing the js-cookie library
 const ShopContextProvider = props => {
   const currency = "Rs";
   const [discount, setdiscount] = useState(0); // Default value set to 190
+  // const [finalTotalShop, setFinalTotalShop] = useState(0); // New state variable to hold final total value
  
   const [delivery_fee, setDelivery_fee] = useState(190); // Default value set to 190
   const [search, setSearch] = useState("");
@@ -20,6 +21,7 @@ const ShopContextProvider = props => {
   const navigate = useNavigate();
   const [productData, setProductData] = useState([]);
   const [product, setProduct] = useState([]);
+  const [cartAmount, setCartAmount] = useState(0);  // Add cartAmount state
 
   const [user, userSet] = useState(Cookies.get('curr_Name')); // Check if token exists in cookies
 
@@ -190,7 +192,9 @@ const ShopContextProvider = props => {
     login,
     logout,
     isLoggedIn: user,
-    discount,setdiscount
+    discount,setdiscount,
+    cartAmount, setCartAmount,  // Add cartAmount state
+ 
   };
 
   return <ShopContext.Provider value={value}>{props.children}</ShopContext.Provider>;

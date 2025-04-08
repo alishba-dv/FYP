@@ -3,20 +3,22 @@ import axios from 'axios';
 import { ShopContext } from '../context/ShopContext';
 
 export const CartCalculator = () => {
-	const { currency, delivery_fee, getCartAmount, discount } = useContext(ShopContext);
-	const [cartAmount, setCartAmount] = useState(0);
+	const { currency, delivery_fee, getCartAmount, discount, // Add final total to context value
+		cartAmount,setCartAmount  } = useContext(ShopContext);
 	const [subscriptionDiscountAmount, setSubscriptionDiscountAmount] = useState(0);
 	const [saleDiscountAmount, setSaleDiscountAmount] = useState(0);
 	const [finalTotal, setFinalTotal] = useState(0);
 	const [saleDiscount, setSaleDiscount] = useState(0); // State for sale discount percentage
-
+	const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
 	useEffect(() => {
 		const fetchCartData = async () => {
 			try {
 				// Fetch both cart amount and sale discount data using Promise.all
 				const [amount, saleResponse] = await Promise.all([
 					getCartAmount(), // Get cart amount from context
-					axios.get('http://localhost:8080/api/getsale'), // Fetch sale discount from backend
+					axios.get(`http://${host}:8080/api/getsale`), // Fetch sale discount from backend
 				]);
 
 				setCartAmount(amount);
@@ -37,13 +39,16 @@ export const CartCalculator = () => {
 				// Calculate final total after discounts and add delivery fee
 				const totalAfterDiscounts = amount - subDiscount - saleDisc;
 				setFinalTotal(totalAfterDiscounts + delivery_fee);
-			} catch (error) {
-				console.error('Error fetching cart data or sale:', error);
+				setCartAmount(totalAfterDiscounts + delivery_fee);
 			}
+				 catch (error) {
+				  console.error('Error fetching cart data or sale:', error);
+				}
+				
 		};
 
 		fetchCartData(); // Call the fetch function on component mount
-	}, [getCartAmount, discount, delivery_fee]);
+	}, [getCartAmount, discount, delivery_fee,cartAmount]);
 
 	return (
 		<div className="w-full max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg">

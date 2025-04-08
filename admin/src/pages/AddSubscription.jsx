@@ -10,7 +10,9 @@ const AddSubscription = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
   const edit = useMemo(() => search?.split("=")[1] === "true", [search]);
-
+const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
   useEffect(() => {
     toast.dismiss(); // Clear all previous toasts
   }, []);
@@ -61,7 +63,7 @@ const AddSubscription = () => {
 
   async function getProducts() {
     try {
-      const response = await axios.get("http://localhost:8080/api/auth/subscription/products", {
+      const response = await axios.get(`http://${host}:8080/api/auth/subscription/products`, {
         withCredentials:true,
       });
       if (response?.data) {
@@ -94,7 +96,7 @@ const AddSubscription = () => {
     };
     try {
       if (edit) {
-        const response = await axios.put(`http://localhost:8080/api/auth/subscription/${editSubscription._id}`, body, {
+        const response = await axios.put(`http://${host}:8080/api/auth/subscription/${editSubscription._id}`, body, {
           withCredentials:true,
         });
         if (response?.data) {
@@ -111,7 +113,7 @@ const AddSubscription = () => {
           navigate("/subscription");
         }
       } else {
-        const response = await axios.post("http://localhost:8080/api/auth/subscription", body, {
+        const response = await axios.post(`http://${host}:8080/api/auth/subscription`, body, {
           withCredentials:true,
         });
         if (response?.data) {

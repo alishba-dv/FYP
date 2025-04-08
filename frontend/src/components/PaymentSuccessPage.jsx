@@ -1,8 +1,15 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 
+  
 const PaymentSuccessPage = () => {
+	useEffect(() => {
+		// Clear cart from localStorage
+		localStorage.removeItem('cart');
+		console.log('Payment successful, cart cleared!');
+	  }, []);
 	return (
 		<div className='flex justify-center items-center min-h-screen bg-gray-100'>
 			<div className='bg-white rounded-lg p-8 w-full max-w-md shadow-lg text-center'>

@@ -353,7 +353,7 @@ router.post("/stripe/webhook", express.raw({ type: "application/json" }), async 
           const total_price = Number(session.metadata.total_price);
           const cartItem = JSON.parse(session.metadata.cartItem); // Assuming this holds the items in the order
 
-          if (!cartItem || !firstName || !lastName || !email || !street || !city || !state || !zipcode || !country || !phone || !total_price) {
+          if (!cartItem || !firstName || !lastName || !email || !street || !city || !state || !zipcode || !country || !phone ) {
             console.error("❌ Missing required fields while processing the order in metadata.", {
               cartItem,
               firstName,
@@ -365,7 +365,7 @@ router.post("/stripe/webhook", express.raw({ type: "application/json" }), async 
               zipcode,
               country,
               phone,
-              total_price,
+              // total_price,
             });
             return res.status(400).send("Missing required fields");
           }

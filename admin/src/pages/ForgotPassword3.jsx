@@ -11,7 +11,9 @@ import axios from 'axios';
 
 const ForgotPassword3 = () => {
 const navigate=useNavigate();
-
+const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
 	const [newpassword,setNewPassword]=useState('');
 	const [confirmPassword,setConfirmPassword]=useState('');
 
@@ -40,7 +42,7 @@ const navigate=useNavigate();
 			return;
 		}
    try {
-    const response = await axios.post("http://localhost:8080/api/reset", {
+    const response = await axios.post(`http://${host}:8080/api/reset`, {
         newpassword,
         email,
     },

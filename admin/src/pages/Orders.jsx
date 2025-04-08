@@ -5,6 +5,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import html2canvas from 'html2canvas';  // Import html2canvas for rendering the component as an image
 import  logo from '../assets/logo.png'; // Import your logo image
 export const Orders = () => {
+  const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -14,7 +17,7 @@ export const Orders = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post('http://localhost:8080/api/admin/auth/Orders', {}, {
+        const response = await axios.post(`http://${host}:8080/api/admin/auth/Orders`, {}, {
           withCredentials: true,
         });
         toast.success(response.data.message, {

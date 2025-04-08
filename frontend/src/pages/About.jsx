@@ -3,8 +3,11 @@ import { IoMdAdd, IoMdRemove } from 'react-icons/io';
 import { FaRegHeart } from 'react-icons/fa';
 import { IoGiftOutline } from 'react-icons/io5';
 import { GoTrophy } from 'react-icons/go';
-import Image1 from '../assets/Image24.jpeg';
+import Image1 from '../assets/FB_IMG_1744039892226.jpg';
+import Image2 from '../assets/img101.jpg';
 
+import Image3 from '../assets/img103.jpg';
+import Image4 from '../assets/img104.jpg';
 const data = [
 	{
 		image: FaRegHeart,
@@ -29,23 +32,23 @@ const data = [
 const staafData = [
 	{
 		image: Image1,
-		name: 'John Doe',
-		rank: 'ASSITENT',
+		name: 'Ubaid Ur Rehman',
+		rank: 'Frontend Developer',
 	},
 	{
-		image: Image1,
-		name: 'John Doe',
-		rank: 'ASSITENT',
+		image: Image3,
+		name: 'Alishba Shabbir',
+		rank: 'Backend Developer',
 	},
 	{
-		image: Image1,
-		name: 'John Doe',
-		rank: 'ASSITENT',
+		image: Image2,
+		name: 'Noman Nawaz',
+		rank: 'Backend Developer',
 	},
 	{
-		image: Image1,
-		name: 'John Doe',
-		rank: 'ASSITENT',
+		image: Image4,
+		name: 'Abu Baker',
+		rank: 'Frontend Developer',
 	},
 ];
 

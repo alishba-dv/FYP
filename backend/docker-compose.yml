@@ -20,3 +20,13 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
+
+  stripe-listen:
+    image: stripe/stripe-cli
+    entrypoint: >
+      sh -c "stripe listen --forward-to backend:8080/stripe/webhook"
+    environment:
+      - STRIPE_API_KEY=sk_test_51Qw1U8BCqcG9036LxgVOL303UwhUG4htSxC2qJv8Uzs1GxJnCDKdnnyJ3E9LH0uTepVPKoHurASZ7wLizh5tDeEw00SkAMJ36h  # ✅ Or use CLI login token
+      - STRIPE_DEVICE_NAME=docker-listener
+    depends_on:
+      - backend

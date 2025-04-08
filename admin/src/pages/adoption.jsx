@@ -5,6 +5,10 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const Adoption = () => {
+
+    const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
     const [petRecords, setPetRecords] = useState([]);
     const [currentIndex, setCurrentIndex] = useState({}); // Track image index for each pet
     useEffect(() => {
@@ -15,7 +19,7 @@ export const Adoption = () => {
             try {
 				// const token = localStorage.getItem('token');
                 // console.log("Token: ",token)
-                const response = await axios.post("http://localhost:8080/api/admin/auth/getadoptionforms", {}, {
+                const response = await axios.post(`http://${host}:8080/api/admin/auth/getadoptionforms`, {}, {
                     withCredentials:true,
                   });
 
@@ -72,7 +76,7 @@ export const Adoption = () => {
     const handleApprove = async (petId) => {
         console.log(`Pet with ID: ${petId} approved!`);
         // const token=('token');
-        const response = await axios.post('http://localhost:8080/api/admin/auth/approvePetRequest', { ID: petId },
+        const response = await axios.post(`http://${host}:8080/api/admin/auth/approvePetRequest`, { ID: petId },
             {
                  withCredentials:true,      });
         if (response) {
@@ -120,7 +124,7 @@ export const Adoption = () => {
                                 {Array.isArray(pet.PetImage) && pet.PetImage.length > 0 ? (
                                     <>
                                         <img
-                                            src={`http://localhost:8080/uploads/${pet.PetImage[currentIndex[pet._id]]}`}
+                                            src={`http://${host}:8080/uploads/${pet.PetImage[currentIndex[pet._id]]}`}
                                             className="w-full h-full object-cover"
                                             alt={pet.PetName || "Pet Image"}
                                         />

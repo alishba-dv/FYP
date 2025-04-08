@@ -12,10 +12,12 @@ const SubscriptionPage = () => {
   // const user = JSON.parse(localStorage.getItem("user"));
   // console.log("USER",user);
     const [loading, loadingSet] = useState(true);
-   
+  	const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0';  
   async function getSubscriptions() {
     try {
-      const response = await axios.get(`http://localhost:8080/api/auth/subscription/getAll`, {
+      const response = await axios.get(`http://${host}:8080/api/auth/subscription/getAll`, {
         withCredentials: true,
       });
       console.log("response", response.data);
@@ -40,7 +42,7 @@ const SubscriptionPage = () => {
     try {
       const stripe = await loadStripe("pk_test_51IfPckI9Cx0UeZSmDtoxrbcKjUokaCoNliigSjzJofNY9D6EWxDe1zO18YOZlMZeyBCNr36M1E1v79eEP6HPecTu00uWfvIR4R");
 
-      const response = await axios.post("http://localhost:8080/api/auth/subscription/subscribe", body, {
+      const response = await axios.post("http://${host}:8080/api/auth/subscription/subscribe", body, {
        withCredentials:true,
       });
       if (response?.data) {

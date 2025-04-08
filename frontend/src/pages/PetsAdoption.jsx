@@ -10,11 +10,13 @@ const PetList = () => {
   const [petType, setPetType] = useState(''); // State for pet type filter
 
   const petTypes = ["Dog", "Cat", "Bird", "Rabbit", "Other"]; // Pet type options
-
+  const host = window.location.hostname === 'localhost'
+  ? 'localhost'
+  : '0.0.0.0'; 
   useEffect(() => {
     const fetchPets = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/admin/auth/getapprovedadoptionforms');
+        const response = await axios.get(`http://${host}:8080/api/admin/auth/getapprovedadoptionforms`);
         setPets(response.data.allforms);
        console.log(response) 
         const initialIndexes = response.data.allforms.reduce((acc, pet) => {
@@ -124,7 +126,7 @@ const PetList = () => {
                 {Array.isArray(pet.PetImage) && pet.PetImage.length > 0 ? (
     <>
       <img
-        src={`http://localhost:8080/uploads/${pet.PetImage[currentIndex[pet._id] || 0]}`}
+        src={`http://${host}:8080/uploads/${pet.PetImage[currentIndex[pet._id] || 0]}`}
         className="w-full h-full object-cover rounded-lg"
         alt={pet.PetName || "Pet Image"}
       />

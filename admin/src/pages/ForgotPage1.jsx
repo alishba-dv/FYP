@@ -10,6 +10,10 @@ const ForgotPage1 = () => {
   const [email, setemail] = useState("");
   const navigate = useNavigate();
 
+  const host = window.location.hostname === 'localhost'
+  ? 'localhost'
+  : '0.0.0.0'; 
+  
   useEffect(() => {
     return () => {
       toast.dismiss();
@@ -30,7 +34,7 @@ const ForgotPage1 = () => {
     console.log("Verifying email:", email);
     // const token =cookies.get("token"); 
     try {
-      const response = await axios.post("http://localhost:8080/api/forgot", { email });
+      const response = await axios.post(`http://${host}:8080/api/forgot`, { email });
       console.log("Response:", response.data);
       // alert("Email verified For Password Recovery");
 

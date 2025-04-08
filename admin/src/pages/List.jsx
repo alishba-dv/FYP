@@ -5,7 +5,6 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// const initialData = [
 // 	{
 // 		_id: 1,
 // 		name: 'Product 1',
@@ -31,6 +30,13 @@ import 'react-toastify/dist/ReactToastify.css';
 // ];
 
 export const List = () => {
+	
+	const host = window.location.hostname === 'localhost'
+	? 'localhost'
+	: '0.0.0.0'; // Or container name if you're accessing between Docker containers
+
+
+
 	const categories = {
 		"Food Product": ["Chicken", "Beef", "Fish", "Others"],
 		"Medicine": ["Tablets", "Syrups", "Injections", "Others"],
@@ -63,7 +69,7 @@ useEffect(() => {
 				const token = localStorage.getItem('token');
 				console.log('Token from list of admin: ', token);
 				const response = await axios.post(
-					'http://localhost:8080/api/admin/auth/List',
+					`http://${host}:8080/api/admin/auth/List`,
 					{},
 					{
 					withCredentials:true,	
@@ -121,7 +127,7 @@ useEffect(() => {
 			const token = localStorage.getItem('token');
 			console.log('Token: update product ', token);
 			const response = await axios.post(
-				'http://localhost:8080/api/admin/auth/updateProduct',
+				`http://${host}:8080/api/admin/auth/updateProduct`,
 				{
 					pid: editingProduct._id,
 					productDetails: editingProduct,
@@ -286,7 +292,7 @@ if (response.status ===400) {
 	
 		try {
 			const response = await axios.post(
-				'http://localhost:8080/api/admin/auth/deleteProduct',
+				'http://${host}:8080/api/admin/auth/deleteProduct',
 				{ pid: productId },
 				{
 					withCredentials:true,
@@ -334,6 +340,9 @@ if (response.status ===400) {
 		setEditingProduct({ ...editingProduct, [name]: value });
 	};
 
+	 
+// const initialData = [
+
 	return (
 		<div className='mt-12 sm:mt-10 px-8 sm:px-10 lg:px5'>
 		<div className='mb-10 sm:mb-12'>
@@ -371,7 +380,7 @@ if (response.status ===400) {
 							{(Array.isArray(item.image) ? item.image : [item.image]).map((img, index) => (
 								<img
 									key={index}
-									src={`http://localhost:8080/uploads/${img}`}
+									src={`http://${host}:8080/uploads/${img}`}
 									alt={`${item.name} - ${index + 1}`}
 									className='w-20 h-20 object-cover rounded-md'
 								/>

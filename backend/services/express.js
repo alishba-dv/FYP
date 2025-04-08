@@ -36,10 +36,20 @@ app.use("/", stripewebhook);
   app.use(cookieParser()); 
   app.use(
     cors({
-      origin: ["http://localhost:5173", "http://localhost:5174"], // Allow frontend origins
-      credentials: true, // Allow cookies
+      origin: [
+          "http://localhost:5173",
+          "http://localhost:5174",
+          "http://172.21.0.2:5173",
+          "http://172.19.0.2:5174/,",
+          
+          "http://0.0.0.0:5173",
+          "http://0.0.0.0:5174"
+        ] ,     credentials: true, // Allow cookies
     })
   );
+
+  app.options('*', cors()); // Optional preflight handling
+
   
 app.use(express.json());
 app.use(express.static("public"));

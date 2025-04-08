@@ -7,28 +7,45 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
 
-
 const citiesOfPakistan = [
-	"Karachi", "Lahore", "Islamabad", "Rawalpindi", "Faisalabad", "Multan", 
-	"Peshawar", "Quetta", "Sialkot", "Gujranwala", "Hyderabad", "Sargodha",
-	"Bahawalpur", "Sukkur", "Larkana"
-  ];
-  
-  const statesOfPakistan = [
-	"Punjab", "Sindh", "Khyber Pakhtunkhwa", "Balochistan", "Gilgit-Baltistan",
-	"Azad Jammu & Kashmir", "Islamabad Capital Territory"
-  ];
+	'Karachi',
+	'Lahore',
+	'Islamabad',
+	'Rawalpindi',
+	'Faisalabad',
+	'Multan',
+	'Peshawar',
+	'Quetta',
+	'Sialkot',
+	'Gujranwala',
+	'Hyderabad',
+	'Sargodha',
+	'Bahawalpur',
+	'Sukkur',
+	'Larkana',
+];
 
-  
+const statesOfPakistan = [
+	'Punjab',
+	'Sindh',
+	'Khyber Pakhtunkhwa',
+	'Balochistan',
+	'Gilgit-Baltistan',
+	'Azad Jammu & Kashmir',
+	'Islamabad Capital Territory',
+];
+
 const Placeorder = () => {
 	const queryParams = new URLSearchParams(window.location.search);
-	const { navigate, cartItem, getCartAmount, delivery_fee, setCartItem } =
+	const { navigate, cartItem,  delivery_fee, setCartItem,cartAmount } =
 		useContext(ShopContext);
-
+		const host = window.location.hostname === 'localhost'
+		? 'localhost'
+		: '0.0.0.0'; 
 	useEffect(() => {
 		toast.dismiss(); // Clear all toasts on component mount
 	}, []);
-const sale = parseFloat(queryParams.get('sale')) || 0;
+	const sale = parseFloat(queryParams.get('sale')) || 0;
 
 	const items = queryParams.getAll('item_id').map((id, index) => ({
 		_id: id,
@@ -36,7 +53,6 @@ const sale = parseFloat(queryParams.get('sale')) || 0;
 		type: queryParams.getAll('item_type')[index],
 		name: queryParams.getAll('item_name')[index],
 		price: queryParams.getAll('item_price')[index],
-
 	}));
 
 	const [formData, setFormData] = useState({
@@ -56,8 +72,8 @@ const sale = parseFloat(queryParams.get('sale')) || 0;
 		if (!validateFormData()) return;
 
 		try {
-			const total_price = (await getCartAmount()) + delivery_fee;
-			const response = await axios.post('http://localhost:8080/api/order', {
+			const total_price = (cartAmount);
+			const response = await axios.post(`http://${host}:8080/api/order`, {
 				...formData,
 				cartItem,
 				items,
@@ -67,10 +83,9 @@ const sale = parseFloat(queryParams.get('sale')) || 0;
 			if (response.status === 200) {
 				toast.success('Order Placed Successfully');
 				navigate('/Order');
-				setCartItem({});
+				localStorage.removeItem('cart');
+						setCartItem({});
 			}
-
-			
 		} catch (err) {
 			if (err.status === 404) {
 				toast.success(err.data.message);
@@ -89,7 +104,7 @@ const sale = parseFloat(queryParams.get('sale')) || 0;
 			const stripe = await loadStripe(
 				'pk_test_51Qw1U8BCqcG9036LlgQ5ruG89O2Jx9CoiNVnfAaJwgULAxLTWaWvo1WU94flOX0Rk1BmmtzjGcZfCBsVS4ZInnk300gUQ4w3EJ'
 			);
-			const total_price = (await getCartAmount()) + delivery_fee;
+			const total_price =  cartAmount;
 
 			const body = {
 				products: Object.values(cartItem), // Ensure it's always an array
@@ -106,7 +121,7 @@ const sale = parseFloat(queryParams.get('sale')) || 0;
 			console.log('Body from placeorder.jsx: ', body);
 
 			const response = await fetch(
-				'http://localhost:8080/api/create-checkout-session',
+				`http://${host}:8080/api/create-checkout-session`,
 				{
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
@@ -146,7 +161,6 @@ const sale = parseFloat(queryParams.get('sale')) || 0;
 			});
 
 			const result = await stripe.redirectToCheckout({ sessionId: session.id });
-
 			if (result.error) {
 				console.error('Stripe redirect error:', result.error);
 				toast.error(`Failed to redirect to Stripe checkout`, {
@@ -159,7 +173,7 @@ const sale = parseFloat(queryParams.get('sale')) || 0;
 		} catch (error) {
 			console.error('Error during Stripe process:', error);
 			toast.error(
-				'An unexpected error occurred. Check the console for more details.',
+				'An unexpected error occurred.',
 				{
 					position: 'top-right',
 					style: { marginRight: '100px' },
@@ -183,10 +197,10 @@ const sale = parseFloat(queryParams.get('sale')) || 0;
 			'phone',
 			'payment_status',
 		];
-	
+
 		for (let field of requiredFields) {
-			const value = formData[field]?.trim() || "";
-	
+			const value = formData[field]?.trim() || '';
+
 			if (!value) {
 				toast.error(`${field} is missing`, {
 					position: 'top-right',
@@ -200,10 +214,10 @@ const sale = parseFloat(queryParams.get('sale')) || 0;
 				});
 				return false;
 			}
-	
+
 			// Ensure fields like name, address, state, and country have at least one letter
-			if (['firstName', 'lastName', 'street' ].includes(field)) {
-				if (!/[A-Za-z]/.test(value)) { 
+			if (['firstName', 'lastName', 'street'].includes(field)) {
+				if (!/[A-Za-z]/.test(value)) {
 					toast.error(`${field} must contain at least one letter`, {
 						position: 'top-right',
 						style: { marginRight: '100px' },
@@ -217,11 +231,8 @@ const sale = parseFloat(queryParams.get('sale')) || 0;
 					return false;
 				}
 			}
-	
-			
-			
-			// Email format validation
 
+			// Email format validation
 
 			if (field === 'email' && !/^[\w.-]+@[\w.-]+\.\w+$/.test(value)) {
 				toast.error('Invalid email format', {
@@ -236,7 +247,7 @@ const sale = parseFloat(queryParams.get('sale')) || 0;
 				});
 				return false;
 			}
-	
+
 			// Phone number validation (min length 10)
 			if (field === 'phone' && value.length < 10) {
 				toast.error('Phone number must be at least 10 digits', {
@@ -251,7 +262,7 @@ const sale = parseFloat(queryParams.get('sale')) || 0;
 				});
 				return false;
 			}
-	
+
 			// Zipcode validation (min length 5)
 			if (field === 'zipcode' && value.length < 5) {
 				toast.error('Zipcode must be at least 5 digits', {
@@ -269,8 +280,7 @@ const sale = parseFloat(queryParams.get('sale')) || 0;
 		}
 		return true;
 	};
-	
-	
+
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -282,108 +292,127 @@ const sale = parseFloat(queryParams.get('sale')) || 0;
 
 	return (
 		<div className='flex flex-col min-h-[80vh]'>
-		  <div className='flex flex-col gap-4 w-full sm:max-w-[480px] mx-auto'>
-			<div className='my-10 text-center'>
-			  <h1 className='text-[#F24C4C] text-3xl sm:text-5xl font-semibold'>
-				DELIVER <span className='text-black'>INFO</span>
-			  </h1>
-			</div>
-			
-			{/* Other Inputs */}
-			{["firstName", "lastName", "email", "street", "zipcode", "phone"].map((field) => (
-			  <input
-				key={field}
-				name={field}
-				onChange={handleInputChange}
-				value={formData[field]}
-				type={field === "email" ? "email" : "text"}
-				className='border border-gray-300 rounded py-1.5 px-3.5 w-full'
-				placeholder={field.replace(/([A-Z])/g, " $1").trim()}
-			  />
-			))}
-	
-			{/* City Dropdown */}
-			<select
-			  name="city"
-			  value={formData.city}
-			  onChange={handleInputChange}
-			  className='border border-gray-300 rounded py-1.5 px-3.5 w-full'
-			>
-			  <option value="">Select City</option>
-			  {citiesOfPakistan.map((city) => (
-				<option key={city} value={city}>{city}</option>
-			  ))}
-			</select>
-	
-			{/* State Dropdown */}
-			<select
-			  name="state"
-			  value={formData.state}
-			  onChange={handleInputChange}
-			  className='border border-gray-300 rounded py-1.5 px-3.5 w-full'
-			>
-			  <option value="">Select State</option>
-			  {statesOfPakistan.map((state) => (
-				<option key={state} value={state}>{state}</option>
-			  ))}
-			</select>
-	
-			{/* Fixed Country Field */}
-			<input
-			  name="country"
-			  value="Pakistan"
-			  readOnly
-			  className='border border-gray-300 rounded py-1.5 px-3.5 w-full bg-gray-100 text-gray-700'
-			/>
-		  </div>
-	
-		  {/* Payment Section */}
-		  <div className='mt-auto w-full flex flex-col lg:flex-row justify-center items-center'>
-			<div className='lg:w-1/2 w-full lg:pr-8'>
-			  <div className='mt-14 p-4 min-w-80'>
-				<CartCalculator saleDiscount={sale} />
-
-			  </div>
-			</div>
-	
-			<div className='lg:w-1/2 w-full'>
-			  <div className='p-4 flex flex-col items-center mt-6'>
-				<h1 className='text-[#F24C4C] text-center text-3xl sm:text-5xl font-semibold'>
-				  PAYMENT <span className='text-black'>METHOD</span>
-				</h1>
-	
-				<div className='flex gap-3 mt-6 mb-4 items-start justify-center flex-col lg:flex-row'>
-				  <div
-					className='flex items-center gap-3 border p-2 px-3 cursor-pointer'
-					onClick={() => handlePaymentSelect("stripe")}
-				  >
-					<p className={`min-w-3.5 h-3.5 border rounded-full ${formData.payment_status === "stripe" ? "bg-green-400" : ""}`}></p>
-					<p className='text-gray-500 text-sm py-1.5 font-medium'>Stripe</p>
-				  </div>
-				  <div
-					className='flex items-center gap-3 border p-2 px-3 cursor-pointer'
-					onClick={() => handlePaymentSelect("cod")}
-				  >
-					<p className={`min-w-3.5 h-3.5 border rounded-full ${formData.payment_status === "cod" ? "bg-green-400" : ""}`}></p>
-					<p className='text-gray-500 text-sm py-1.5 font-medium'>Cash on Delivery</p>
-				  </div>
+			<div className='flex flex-col gap-4 w-full sm:max-w-[480px] mx-auto'>
+				<div className='my-10 text-center'>
+					<h1 className='text-[#F24C4C] text-3xl sm:text-5xl font-semibold'>
+						DELIVER <span className='text-black'>INFO</span>
+					</h1>
 				</div>
-	
-				{formData.payment_status === "stripe" && (
-				  <button onClick={handleStripePayment} className='mt-4 px-4 py-2 bg-[#F24C4C] text-white rounded-lg'>
-					PAY
-				  </button>
+
+				{/* Other Inputs */}
+				{['firstName', 'lastName', 'email', 'street', 'zipcode', 'phone'].map(
+					(field) => (
+						<input
+							key={field}
+							name={field}
+							onChange={handleInputChange}
+							value={formData[field]}
+							type={field === 'email' ? 'email' : 'text'}
+							className='border border-gray-300 rounded py-1.5 px-3.5 w-full'
+							placeholder={field.replace(/([A-Z])/g, ' $1').trim()}
+						/>
+					)
 				)}
-				{formData.payment_status === "cod" && (
-				  <button onClick={proceedToCheckout} className='mt-4 px-4 py-2 bg-[#F24C4C] text-white rounded-lg'>
-					PLACE ORDER
-				  </button>
-				)}
-			  </div>
+
+				{/* City Dropdown */}
+				<select
+					name='city'
+					value={formData.city}
+					onChange={handleInputChange}
+					className='border border-gray-300 rounded py-1.5 px-3.5 w-full'>
+					<option value=''>Select City</option>
+					{citiesOfPakistan.map((city) => (
+						<option
+							key={city}
+							value={city}>
+							{city}
+						</option>
+					))}
+				</select>
+
+				{/* State Dropdown */}
+				<select
+					name='state'
+					value={formData.state}
+					onChange={handleInputChange}
+					className='border border-gray-300 rounded py-1.5 px-3.5 w-full'>
+					<option value=''>Select State</option>
+					{statesOfPakistan.map((state) => (
+						<option
+							key={state}
+							value={state}>
+							{state}
+						</option>
+					))}
+				</select>
+
+				{/* Fixed Country Field */}
+				<input
+					name='country'
+					value='Pakistan'
+					readOnly
+					className='border border-gray-300 rounded py-1.5 px-3.5 w-full bg-gray-100 text-gray-700'
+				/>
 			</div>
-		  </div>
+
+			{/* Payment Section */}
+			<div className='mt-auto w-full flex flex-col lg:flex-row justify-center items-center'>
+				<div className='lg:w-1/2 w-full lg:pr-8'>
+					<div className='mt-14 p-4 min-w-80'>
+						<CartCalculator saleDiscount={sale} />
+					</div>
+				</div>
+
+				<div className='lg:w-1/2 w-full'>
+					<div className='p-4 flex flex-col items-center mt-6'>
+						<h1 className='text-[#F24C4C] text-center text-3xl sm:text-5xl font-semibold'>
+							PAYMENT <span className='text-black'>METHOD</span>
+						</h1>
+
+						<div className='flex gap-3 mt-6 mb-4 items-start justify-center flex-col lg:flex-row'>
+							<div
+								className='flex items-center gap-3  p-2 px-3 cursor-pointer'
+								onClick={() => handlePaymentSelect('stripe')}>
+								<p
+									className={`min-w-3.5 h-3.5 border rounded-full ${
+										formData.payment_status === 'stripe' ? 'bg-green-400' : ''
+									}`}></p>
+								<p className='text-gray-500 text-sm py-1.5 font-medium'>
+									Stripe
+								</p>
+							</div>
+							<div
+								className='flex items-center gap-3  p-2 px-3 cursor-pointer'
+								onClick={() => handlePaymentSelect('cod')}>
+								<p
+									className={`min-w-3.5 h-3.5 border rounded-full ${
+										formData.payment_status === 'cod' ? 'bg-green-400' : ''
+									}`}></p>
+								<p className='text-gray-500 text-sm py-1.5 font-medium'>
+									Cash on Delivery
+								</p>
+							</div>
+						</div>
+
+						{formData.payment_status === 'stripe' && (
+							<button
+								onClick={handleStripePayment}
+								className='mt-4 px-4 py-2 bg-[#F24C4C] text-white rounded-lg'>
+								PAY
+							</button>
+						)}
+						{formData.payment_status === 'cod' && (
+							<button
+								onClick={proceedToCheckout}
+								className='mt-4 px-4 py-2 bg-[#F24C4C] text-white rounded-lg'>
+								PLACE ORDER
+							</button>
+						)}
+					</div>
+				</div>
+			</div>
 		</div>
-	  );
-	};
-	
-	export default Placeorder;
+	);
+};
+
+export default Placeorder;

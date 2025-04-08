@@ -11,7 +11,10 @@ const AccessoriesCollection = () => {
 	const [filterProducts, setFilterProducts] = useState([]);
 	const [category, setCategory] = useState('');
 	const [subcategory, setSubcategory] = useState('');
-
+	const host = window.location.hostname === 'localhost'
+	? 'localhost'
+	: '0.0.0.0';
+	
 	// Fetch data only once when the component mounts
 
 	// Handle category filter
@@ -48,8 +51,12 @@ const AccessoriesCollection = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
+				const host = window.location.hostname === 'localhost'
+    ? 'localhost'
+    : '0.0.0.0'; 
+				
 				const response = await axios.post(
-					'http://localhost:8080/api/Accessories'
+					`http://${host}:8080/api/Accessories`
 				);
 				console.log('Response: ', response);
 				setAccessories(response.data.data); // Store original data
@@ -74,7 +81,7 @@ const AccessoriesCollection = () => {
 			<div className='min-w-[200px] mt-0 sm:mt-16 sm:min-w-[250px]'>
 				<p
 					onClick={() => setValue(!value)}
-					className='my-4 text-2xl font-semibold flex items-center cursor-pointer gap-2 hover:text-[#F24C4C] transition duration-300 ease-in-out sm:hidden'>
+					className='my-4 text-2xl ml-4 font-semibold flex items-center cursor-pointer gap-2 hover:text-[#F24C4C] transition duration-300 ease-in-out sm:hidden'>
 					Filter
 					<IoIosArrowForward
 						className={`pt-1 transform ${
@@ -150,7 +157,7 @@ const AccessoriesCollection = () => {
 			{/* Product Display */}
 			<div className='flex-1'>
 				<div className='mb-10'>
-					<h1 className='text-[#F24C4C] text-5xl font-semibold sm:text-left'>
+					<h1 className='text-[#F24C4C] text-5xl sm:ml-0 ml-4 font-semibold sm:text-left'>
 						ACCESSORIES <span className='text-black'>COLLECTION</span>
 					</h1>
 				</div>
@@ -164,7 +171,7 @@ const AccessoriesCollection = () => {
 								className='w-full max-w-[280px] bg-white pb-4 rounded-lg border border-gray-300'>
 								<AccessProductItem
 									id={item._id}
-									// image=<img src='http://localhost:8080/uploads/${item.image}'/>
+									// image=<img src='http://${host}:8080/uploads/${item.image}'/>
 									image={item.image}
 									price={item.price}
 									name={item.name}
