@@ -1,0 +1,59 @@
+/* Tailwind Base Setup */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Active State for Navigation or Buttons */
+.active {
+  @apply bg-gray-800 text-red-500 rounded-lg shadow-lg;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover Effect to Enhance Interaction */
+.active:hover {
+  @apply bg-gray-900 scale-105;
+}
+
+/* Admin Panel Main Layout */
+.admin-container {
+  @apply min-h-screen bg-gradient-to-r from-gray-800 to-gray-600 p-8;
+}
+
+/* Card Component */
+.admin-card {
+  @apply bg-gray-700 shadow-lg rounded-xl p-6 transition-transform duration-300 text-gray-100;
+}
+
+.admin-card:hover {
+  @apply scale-105 shadow-2xl;
+}
+
+/* Admin Navigation Links */
+.admin-link {
+  @apply text-gray-400 hover:text-red-500 transition-colors duration-300;
+}
+
+/* Admin Header */
+.admin-header {
+  @apply text-4xl font-extrabold text-gray-300 mb-8 border-b-4 border-red-500 pb-2;
+}
+
+/* Button Styling */
+.admin-btn {
+  @apply bg-red-500 text-white py-2 px-6 rounded-md hover:bg-red-600 focus:ring-2 focus:ring-red-300 transition;
+}
+
+/* Input Fields */
+.admin-input {
+  @apply border border-gray-500 rounded-md p-3 bg-gray-800 text-gray-300 focus:ring focus:ring-red-400 transition;
+}
+
+/* Dashboard Grid */
+.admin-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8;
+}
+
+/* Footer */
+.admin-footer {
+  @apply text-center text-gray-400 mt-12;
+}

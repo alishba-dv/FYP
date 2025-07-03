@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+  <title>Furliva</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+    rel="stylesheet">
+</head>
+
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+  <!-- Chatbot Iframe -->
+  <iframe class="chat-container" id="chatbot"
+    src="https://cdn.botpress.cloud/webchat/v2.2/shareable.html?configUrl=https://files.bpcontent.cloud/2025/02/05/15/20250205155902-H1H22DPK.json"
+    title="Chatbot"></iframe>
+
+  <!-- Chat Icon -->
+  <div class="chat-icon-container">
+    <img class="chat-icon" src="https://img.icons8.com/color/48/000000/chat.png" alt="Chat Icon" id="chat-icon">
+  </div>
+
+  <script>
+    // Show/Hide chatbot when the icon is clicked
+    const chatIcon = document.getElementById('chat-icon');
+    const chatbot = document.getElementById('chatbot');
+
+    chatIcon.onclick = function () {
+      if (chatbot.style.display === 'none' || chatbot.style.display === '') {
+        chatbot.style.display = 'block'; // Show chatbot
+      } else {
+        chatbot.style.display = 'none'; // Hide chatbot
+      }
+    };
+
+
+  </script>
+
+  <!-- <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2025/02/04/18/20250204183241-09WLNSXY.js"></script>
+     -->
+</body>
+
+</html>
+<style>
+  .chat-icon-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    background-color: #ffff;
+    padding: 8px;
+    border-radius: 55px;
+  }
+
+  .chat-icon {}
+
+  .chat-container {
+    position: fixed;
+    right: 0;
+    bottom: 90px;
+    /* Adjusted to show above the chat icon */
+    right: 20px;
+    /* Aligned with the chat icon */
+    width: 360px;
+    height: 40%;
+    border-radius: 20px;
+    /* More rounded edges */
+    border: 1px solid #ccc;
+    /* Optional border */
+    display: none;
+    z-index: 1001;
+    /* Higher z-index to ensure it appears above the chat icon */
+    background-color: white;
+    /* White background */
+    color: red;
+    /* Red text color */
+  }
+
+  @media (min-width: 780px) {
+    .chat-container {
+      width: 600px;
+    }
+  }
+</style>

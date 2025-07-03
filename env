@@ -1,0 +1,12 @@
+JWT_SECRET="123@A"
+PORT=8080
+STRIPE_WEBHOOK_SECRET=whsec_c0db078f79e8bd56380ebd07661cc066418bb9adabb1036678ec0a1d580c4606    
+EMAIL_USER=teamfurliva@gmail.com
+EMAIL_PASS= qorg phfn lffr krwb
+STRIPE_SECRET_KEY=sk_test_51Qw1U8BCqcG9036LxgVOL303UwhUG4htSxC2qJv8Uzs1GxJnCDKdnnyJ3E9LH0uTepVPKoHurASZ7wLizh5tDeEw00SkAMJ36h
+STRIPE_PUBLISHABLE_KEY=pk_test_51Qw1U8BCqcG9036LlgQ5ruG89O2Jx9CoiNVnfAaJwgULAxLTWaWvo1WU94flOX0Rk1BmmtzjGcZfCBsVS4ZInnk300gUQ4w3EJ
+mongoUri=mongodb://bsef21m504:voG8WDhtso0Lj2vq@cluster0-shard-00-00.pp75j.mongodb.net:27017,cluster0-shard-00-01.pp75j.mongodb.net:27017,cluster0-shard-00-02.pp75j.mongodb.net:27017/Furliva?ssl=true&replicaSet=atlas-3qfel0-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0
+
+MONGO_USERNAME=bsef21m504
+MONGO_PASSWORD=voG8WDhtso0Lj2vq
+MONGO_CLUSTER=cluster0.pp75j.mongodb.net
