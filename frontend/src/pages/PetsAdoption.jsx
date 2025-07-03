@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6"; // Import the icons
+<<<<<<< HEAD
 import Cookies from "js-cookie"; // Importing the js-cookie library
+=======
+>>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
 
 const PetList = () => {
   const [pets, setPets] = useState([]);
@@ -9,10 +12,15 @@ const PetList = () => {
   const [category, setCategory] = useState('');
   const [search, setSearch] = useState('');
   const [petType, setPetType] = useState(''); // State for pet type filter
+<<<<<<< HEAD
 const [myApplications, setMyApplications] = useState([ ]); 
   const userEmail = Cookies.get("curr_userEmail");
 
 const petTypes = ["Dog", "Cat", "Bird", "Rabbit", "Other"]; // Pet type options
+=======
+
+  const petTypes = ["Dog", "Cat", "Bird", "Rabbit", "Other"]; // Pet type options
+>>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
   const host = window.location.hostname === 'localhost'
   ? 'localhost'
   : '0.0.0.0'; 
@@ -33,6 +41,7 @@ const petTypes = ["Dog", "Cat", "Bird", "Rabbit", "Other"]; // Pet type options
     };
     fetchPets();
   }, []);
+<<<<<<< HEAD
   const handleUnpublish = async (petId) => {
     try {
       console.log('Unpublishing pet ID:', petId);
@@ -77,6 +86,8 @@ useEffect(() => {
     fetchmyPets();
   }, []);
 
+=======
+>>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
 
   const handleCall = (Phone) => {
     window.location.href = `tel:${Phone}`;
@@ -111,10 +122,17 @@ useEffect(() => {
   const filteredPets = applyFilter();
 
   return (
+<<<<<<< HEAD
 		<div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
       {/* Left Filter Section */}
      
 			<div className='min-w-[200px] sm:min-w-[250px]'>
+=======
+    <div className="flex flex-col sm:flex-row gap-2 p-5">
+      {/* Left Filter Section */}
+     
+      <div className=" sm:w-[250px] mt-1 large:mt-16">
+>>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
   {/* Pet Type Filter */}
   <div className="pl-5 py-4 my-6 transition-all duration-300 ease-in-out">
     <p className="mb-3 text-lg font-semibold text-gray-800">
@@ -220,6 +238,7 @@ useEffect(() => {
             </div>
           )}
         </div>
+<<<<<<< HEAD
         {/* My Applications Section */}
 <div className='mt-10'>
   <h1 className='text-4xl font-semibold text-[#F24C4C] mb-6'>
@@ -295,6 +314,8 @@ useEffect(() => {
   </div>
 </div>
 
+=======
+>>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
       </div>
     </div>
   );

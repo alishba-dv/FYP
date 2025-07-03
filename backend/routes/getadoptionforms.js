@@ -57,6 +57,7 @@ catch(err){
 
 });
 
+<<<<<<< HEAD
 
 router.get('/getmyadoptionforms',async (req,res)=>{
 
@@ -110,4 +111,6 @@ router.get('/unpublish',async (req,res)=>{
 
 
 
+=======
+>>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
 module.exports=router;

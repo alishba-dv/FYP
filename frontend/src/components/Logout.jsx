@@ -12,7 +12,10 @@ const Logout = () => {
   Cookies.remove("userId");
   Cookies.remove("curr_userEmail");
   Cookies.remove("curr_Name");
+<<<<<<< HEAD
   
+=======
+>>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
   // Cookies.remove;
   setDelivery_fee(190);
   setdiscount(0);

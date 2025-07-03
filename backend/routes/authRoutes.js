@@ -65,7 +65,11 @@ router.post('/login', async (req, res) => {
     }
 
     // Generate JWT token
+<<<<<<< HEAD
     const token = jwt.sign({ id:user.id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
+=======
+    const token = jwt.sign({ id:user.id, email: user.email, role: user.role }, process.env.JWT_SECRET, { expiresIn: '7d' });
+>>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
     // res.cookie('token', token, {
     //   httpOnly: true,
     //   // secure: false,  // Secure must be false for HTTP
@@ -100,12 +104,27 @@ router.post('/admin/login',async(req,res)=>{
     if(user.role!=="admin"){
       return res.status(404).json({error:"unauthorized access"});
     }
+<<<<<<< HEAD
     const token=jwt.sign({email:user.email,role:user.role},process.env.JWT_SECRET,{expiresIn:'1d'});
  
     
     console.log("Token genenrated for admin",token);
 
 
+=======
+    const token=jwt.sign({email:user.email,role:user.role},process.env.JWT_SECRET,{expiresIn:'7d'});
+ 
+    
+    console.log("Token genenrated fr admin",token);
+    // res.cookie('token', token, {
+    //   httpOnly: true,
+    //   // secure: false,  // Secure must be false for HTTP
+    //   //  sameSite: 'Lax',  // Use 'None' only if using HTTPS
+      
+    //   path: '/', 
+    //   expires: new Date(Date.now() + 86400000), 
+    // });
+>>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
     const userId = user._id.toString();
     console.log("Userid: ",userId)
     res.status(200).json({token,message:"Login successful",name:user.name,email:user.email,role:user.role,userId:userId});

@@ -38,10 +38,16 @@ app.use("/", stripewebhook);
     cors({
       origin: [
           "http://localhost:5173",
+<<<<<<< HEAD
           "http://localhost:5174",       
           "http://172.21.0.2:5173",
           "http://172.19.0.2:5174/,",
          
+=======
+          "http://localhost:5174",
+          "http://172.21.0.2:5173",
+          "http://172.19.0.2:5174/,",
+>>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
           
           "http://0.0.0.0:5173",
           "http://0.0.0.0:5174"
@@ -49,7 +55,11 @@ app.use("/", stripewebhook);
     })
   );
 
+<<<<<<< HEAD
   app.options('*', cors()); 
+=======
+  app.options('*', cors()); // Optional preflight handling
+>>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
 
   
 app.use(express.json());

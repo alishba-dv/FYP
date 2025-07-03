@@ -73,7 +73,11 @@ export const CartCalculator = () => {
 			<div className="flex flex-col gap-4 text-sm">
 				{/* Subtotal */}
 				<div className="flex justify-between py-2 px-4 bg-gray-50 rounded-md shadow-sm">
+<<<<<<< HEAD
 					<p className="text-gray-700">Total </p>
+=======
+					<p className="text-gray-700">Subtotal</p>
+>>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
 					<p className="font-medium text-gray-800">
 						{currency}{cartAmount.toFixed(2)}
 					</p>

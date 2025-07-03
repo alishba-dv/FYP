@@ -37,11 +37,18 @@ export const Login = () => {
       if (response.data.role === "admin" && response.status === 200) {
         const { token, message, ...rest } = response.data;
     
+<<<<<<< HEAD
         const expires = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toUTCString(); // 1 day from now
 
         document.cookie = `curr_adminEmail=${response.data.email}; path=/;expires=${expires};`;
         document.cookie = `Role=${response.data.role}; path=/;expires=${expires};`;
         document.cookie = `token=${response.data.token}; path=/;expires=${expires};`;
+=======
+        // Corrected document.cookie syntax
+        document.cookie = `curr_adminEmail=${response.data.email}; path=/;`;
+        document.cookie = `Role=${response.data.role}; path=/;`;
+        document.cookie = `token=${response.data.token}; path=/;`;
+>>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
 
         // document.cookie = `name=${(response.data.name)}; path=/;`;
     

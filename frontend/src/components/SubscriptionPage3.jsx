@@ -11,9 +11,13 @@ const SubscriptionPage = () => {
   // const token = localStorage.getItem("token");
   // const user = JSON.parse(localStorage.getItem("user"));
   // console.log("USER",user);
+<<<<<<< HEAD
    
   
   const [loading, loadingSet] = useState(true);
+=======
+    const [loading, loadingSet] = useState(true);
+>>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
   	const host = window.location.hostname === 'localhost'
     ? 'localhost'
     : '0.0.0.0';  

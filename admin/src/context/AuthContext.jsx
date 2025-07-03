@@ -7,7 +7,11 @@ import Cookies from "js-cookie"; // Importing the js-cookie library
 const AuthContextProvider = (props) => {
   const [user, setUser] = useState(() => {
     try {
+<<<<<<< HEAD
       return  (Cookies.get('curr_adminEmail')); // Check if token exists in cookies
+=======
+      return  (Cookies.get('user')); // Check if token exists in cookies
+>>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
  
     } catch (error) {
       console.error("Error parsing user from cookie:", error);
