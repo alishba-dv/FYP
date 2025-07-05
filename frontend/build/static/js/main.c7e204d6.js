@@ -1,0 +1,2 @@
+(()=>{"use strict";const e=require("http"),r=require("../../backend/services/express"),n=require("../../backend/services/db");!async function(){const c=e.createServer(r);await n();const i={NODE_ENV:"production",PUBLIC_URL:"",WDS_SOCKET_HOST:void 0,WDS_SOCKET_PATH:void 0,WDS_SOCKET_PORT:void 0,FAST_REFRESH:!0}.PORT||8080;c.listen(i,"0.0.0.0",()=>console.log("Server is running on ".concat(i)))}()})();
+//# sourceMappingURL=main.c7e204d6.js.map

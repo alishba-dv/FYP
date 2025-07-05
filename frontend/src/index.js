@@ -1,6 +1,6 @@
 const http = require("http");
-const app = require("./services/express");
-const connectDB = require("./services/db"); // Import DB connection
+const app = require("../../backend/services/express");
+const connectDB = require("../../backend/services/db"); // Import DB connection
 
 async function main() {
   const server = http.createServer(app);
