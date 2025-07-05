@@ -51,10 +51,7 @@ const Login = () => {
         console.log("Signup Response:", response.data);
 
         if (response.status == 200) {
-<<<<<<< HEAD
           
-=======
->>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
           // localStorage.setItem("curr_userEmail", response.data.email);
           // localStorage.setItem("curr_Name", response.data.name);
 
@@ -81,7 +78,6 @@ const Login = () => {
           // localStorage.setItem("curr_userEmail", response.data.email);
           // localStorage.setItem("curr_Name", response.data.name);
           // localStorage.setItem("user", JSON.stringify(rest));
-<<<<<<< HEAD
           const expires = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toUTCString(); // 1 day from now
 
           document.cookie = `curr_userEmail=${response.data.email}; path=/;expires=${expires};`;
@@ -93,14 +89,6 @@ const Login = () => {
           // Navigate without query parameters
           // navigate("/Myprofile");
           navigate('/Myprofile?email='+response.data.email+'&name='+response.data.name); // Redirect to dashboard or home page
-=======
-          
-          login(rest);
-          // Navigate without query parameters
-          navigate("/Myprofile");
-
-          // navigate('/Myprofile?email='+response.data.email+'&name='+response.data.name); // Redirect to dashboard or home page
->>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
         }
       } else {
         // Login request
@@ -109,11 +97,7 @@ const Login = () => {
         // localStorage.setItem("curr_Name", response.data.name);
 
         // const { token} = response.data;
-<<<<<<< HEAD
         const expires = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toUTCString(); // 1 day from now
-=======
-        const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toUTCString(); // 7 days from now
->>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
 
         // Store token in cookies instead of localStorage
         document.cookie = `curr_userEmail=${response.data.email}; path=/;expires=${expires};`;

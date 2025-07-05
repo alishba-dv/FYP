@@ -117,11 +117,7 @@ const Cart = () => {
 
 			const response = await axios.post(`http://${host}:8080/api/checkout`, {
 				cartItem,
-<<<<<<< HEAD
 				total_price,userId
-=======
-				total_price,
->>>>>>> 90cd219c228b5a0141eeb0d030ff8eca3a3897ad
 			});
 
 			console.log('Response with features: ', response);
