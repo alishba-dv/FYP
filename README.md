@@ -52,8 +52,24 @@ Provide full admin control through an intuitive dashboard.
 
 Create a smooth and engaging user experience.
 
-📷 Screenshots
-(Add images of your UI when available)
+📷 Demo
+
+
+https://github.com/user-attachments/assets/5bb7f15f-04af-4906-a106-ebf9a97fa3fc
+
+
+
+
+
+https://github.com/user-attachments/assets/595ae283-f954-4c43-824a-25719773f994
+
+
+https://github.com/user-attachments/assets/53b72ada-644e-44b5-933f-ba935fd77137
+
+
+
+
+
 
 📦 Installation & Setup
 Clone the repository
@@ -90,6 +106,46 @@ npm run dev
 
 http://localhost:5173
 
+
+------------------------------------------
+
+### Or by pulling image from docker you can start project using these commands
+
+###change current directory to frontend
+
+cd frontend
+
+sudo docker compose up   ### works for Ubuntu lunar 23.04 version (Stable version)
+
+
+##change current directory to backend
+
+cd backend
+
+sudo docker compose up   ### works for Ubuntu lunar 23.04 version(Stable version)
+
+
+
 ```
 
 
+
+🤝 Contribution Guidelines
+We welcome contributions!
+
+Fork the repo
+
+Create a feature branch
+
+Commit changes
+
+Open a pull request
+
+
+
+
+🚀 Possible Future Enhancements
+
+Integrate a better sale module, current is less efficient and needs enhancements
+Integrate a vet module for appointments by pets owners
+Future versions to be supported by more languages
