@@ -35,13 +35,14 @@ docker pull alishba111/furliva:backend
 
 🛠 Tech Stack
 
-# ##Technology	                          Purpose
-# React.js        	              Frontend presentation layer
-# Node.js / Express.js          	Backend API & business logic
-# MongoDB                         Database for pets, users, and products
-# Botpress	                      AI chatbot for recommendations
-# Tailwind CSS	                  Responsive UI styling
-# Docker                          Containerization of project
+### Technology	                          Purpose
+### React.js        	          |    Frontend presentation layer
+### Node.js / Express.js        |  	Backend API & business logic
+### MongoDB                     |    Database for pets, users, and products
+### Botpress	                  |    AI chatbot for recommendations
+### Tailwind CSS	              |    Responsive UI styling
+### Docker                      |    Containerization of project
+
 🚀 Project Goals
 Streamline the pet adoption process.
 
