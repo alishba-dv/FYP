@@ -78,8 +78,8 @@ Clone the repository
 
 ```bash
 
-git clone https://github.com/your-username/pet-care-adoption.git
-cd pet-care-adoption
+git clone https://github.com/alishba-dv/FYP.git
+cd FYP
 ##Install dependencies
 ##For backend:
 
