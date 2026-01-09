@@ -1,6 +1,6 @@
 
 # FYP
-A  web-bassed platform that blends e-commerce, pet adoption, and personalized pet care solutions into one seamless experience. Users can adopt pets directly from owners, purchase tailored health and wellness products, and receive AI-powered recommendations for their pets’ needs.
+A  web-based platform that blends e-commerce, pet adoption, and personalized pet care solutions into one seamless experience. Users can adopt pets directly from owners, purchase tailored health and wellness products, and receive AI-powered recommendations for their pets’ needs.
 
 The system also includes an Admin Panel with a UI Dashboard for managing products, users, orders, and adoption requests.
 
