@@ -4,7 +4,8 @@ A  web-based platform that blends e-commerce, pet adoption, and personalized pet
 
 The system also includes an Admin Panel with a UI Dashboard for managing products, users, orders, and adoption requests.
 
-📌 Features
+📌 **Features**
+
 🐶 Pet Adoption – Browse, explore, and adopt pets from verified owners.
 
 🛒 E-Commerce Store – Buy high-quality pet care products, food, and accessories.
